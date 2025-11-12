@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Responsive Page</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="phone-screen">
+        <div class="main-box">
+            <span class="main-box-title">K-Fishery</span>
+            <div class="location-info">
+                <svg class="location-icon" viewBox="0 0 24 24">
+                    <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5S10.62 6.5 12 6.5s2.5 1.12 2.5 2.5S13.38 11.5 12 11.5z" fill="black"/>
+                </svg>
+                <span data-i18n="location">부산 · 자갈치시장</span>
+            </div>
+            <span class="main-box-description" data-i18n="main-description">AI로 어종·무게 인식 및 오늘의 적정가 확인</span>
+        </div>
+        <div class="secondary-box">
+            <span class="secondary-box-title" data-i18n="seasonal-title">오늘의 제철 추천어종</span>
+            <span class="secondary-box-description" data-i18n="seasonal-description">연안 시계열(K-Means) · SST/어군밀도 기반</span>
+            <div class="inner-content-box" id="fish-display-box">
+                <span id="fish-display-text"></span>
+            </div>
+            <div class="fish-tags-container">
+                <div class="fish-tag" style="background-color: #E0F2FE;" data-i18n="flounder">광어</div>
+                <div class="fish-tag" style="background-color: #DCFCE7;" data-i18n="hairtail">전어</div>
+                <div class="fish-tag" style="background-color: #F5F3FF;" data-i18n="cuttlefish">갑오징어</div>
+            </div>
+        </div>
+        <div class="horizontal-container">
+            <div class="small-box" id="fish-check-box">
+                <span class="small-box-title">
+                    <svg class="small-fish-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M10 3C10 2.46957 10.2107 1.96086 10.5858 1.58579C10.9609 1.21071 11.4696 1 12 1C12.5304 1 13.0391 1.21071 13.4142 1.58579C13.7893 1.96086 14 2.46957 14 3V10.17C14.9092 10.6211 15.6391 11.3662 16.0714 12.2845C16.5037 13.2027 16.6129 14.2401 16.3812 15.2282C16.1496 16.2164 15.5907 17.0972 14.7954 17.7276C14 18.358 13.0149 18.7011 12 18.7011C10.9851 18.7011 9.99999 18.358 9.20465 17.7276C8.40931 17.0972 7.85044 16.2164 7.61879 15.2282C7.38714 14.2401 7.49632 13.2027 7.92859 12.2845C8.36086 11.3662 9.09084 10.6211 10 10.17V3Z" stroke="black" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M12 16C13.1046 16 14 15.1046 14 14C14 12.8954 13.1046 12 12 12C10.8954 12 10 12.8954 10 14C10 15.1046 10.8954 16 12 16Z" stroke="black" stroke-width="1.8"/>
+<path d="M12 3V9" stroke="black" stroke-width="1.8" stroke-linecap="round"/>
+<path d="M3 21C4.6 21 4.6 20 6.2 20C7.8 20 7.8 21 9.4 21C11 21 11 20 12.6 20C14.2 20 14.2 21 15.8 21C17.4 21 17.4 20 19 20" stroke="black" stroke-width="1.6" stroke-linecap="round"/>
+</svg>
+                   <span data-i18n="warm-sea">수온바다</span>
+                </span>
+                <span class="small-box-description" data-i18n="warm-sea-desc">수온 데이터로 내일 수영할 바다 찾기</span>
+            </div>
+            <div class="small-box" id="warning-box">
+                <span class="small-box-title">
+                    <svg class="warning-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M12 3L2 21h20L12 3z" fill="#000000"/>
+                        <rect x="11" y="9" width="2" height="7" rx="1" fill="#FFFFFF"/>
+                        <rect x="11" y="17.5" width="2" height="2" rx="1" fill="#FFFFFF"/>
+                    </svg>
+                    <span data-i18n="warning">주의점</span>
+                </span>
+                <span class="small-box-description" data-i18n="warning-desc">사기 유형 · 숨은 비용 계산</span>
+                </div>
+        </div>
+        <div class="bottom-box" id="market-guide-box">
+            <span class="small-box-title">
+                <svg class="market-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M3 6H21V10L19 12L16 10L13 12L10 10L7 12L3 10V6ZM4 12H20V18C20 18.5304 19.7893 19.0391 19.4142 19.4142C19.0391 19.7893 18.5304 20 18 20H6C5.46957 20 4.96086 19.7893 4.58579 19.4142C4.21071 19.0391 4 18.5304 4 18V12Z" fill="#0B1020"/>
+                </svg>
+                <span data-i18n="market-guide">시장 설명서</span>
+            </span>
+            <span class="small-box-description" data-i18n="market-guide-desc">구조·상차림비·결제·영업시간 안내</span>
+        </div>
+        <div class="colored-box">
+            <svg class="price-check-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M4 5H8M16 5H20M4 19H8M16 19H20M6 8V16H18V8H6Z" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+            <span data-i18n="price-check">오늘의 적정가 빠르게 확인하기</span>
+        </div>
+
+        <div class="tab-bar">
+            <div class="tab-item"></div>
+            <div class="tab-item"></div>
+            <div class="tab-item"></div>
+            <div class="tab-item"></div>
+            <div class="tab-item"></div>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>

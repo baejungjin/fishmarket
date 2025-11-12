@@ -1,0 +1,226 @@
+body {
+    margin: 0;
+    background-color: #E5E7EB; /* A neutral background for the page */
+}
+
+.phone-screen {
+    position: relative;
+    width: 390px;
+    min-height: 100vh;
+    margin: 0 auto;
+    background-color: #0EA5E9;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-bottom: 100px; /* For tab bar */
+    box-sizing: border-box;
+}
+
+.main-box {
+    width: 91.8%; /* (358 / 390) * 100 */
+    max-width: 358px;
+    height: 120px;
+    margin-top: 49px;
+    background-color: rgba(255, 255, 255, 0.13);
+    border-radius: 10px; /* Modern style */
+    border: 1px solid rgba(255, 255, 255, 0.4);
+    position: relative; /* For absolute positioning of children */
+}
+
+.secondary-box {
+    width: 91.8%; /* (358 / 390) * 100 */
+    max-width: 358px;
+    height: 206px;
+    margin-top: 14px;
+    background-color: #FFFFFF;
+    border-radius: 10px;
+    position: relative; /* For absolute positioning of children */
+}
+
+.horizontal-container {
+    display: flex;
+    justify-content: space-between;
+    width: 91.8%; /* (358 / 390) * 100 */
+    max-width: 358px;
+    margin-top: 16px;
+}
+
+.small-box {
+    width: 48.04%; /* 172 / 358 */
+    height: 120px;
+    background-color: #FFFFFF;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 15px; /* Internal spacing */
+    box-sizing: border-box; /* Include padding in width/height */
+}
+
+.bottom-box {
+    width: 91.8%; /* (358 / 390) * 100 */
+    max-width: 358px;
+    height: 120px;
+    margin-top: 8px;
+    background-color: #FFFFFF;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 15px; /* Internal spacing */
+    box-sizing: border-box; /* Include padding in width/height */
+}
+
+.colored-box {
+    width: 91.8%; /* (358 / 390) * 100 */
+    max-width: 358px;
+    height: 70px;
+    margin-top: 16px;
+    background-color: #22D3EE; /* Changed color */
+    border-radius: 10px;
+    display: flex; /* To center content */
+    align-items: center;
+    justify-content: center;
+    color: white; /* Text color */
+    font-size: 16px; /* Text font size */
+    font-weight: bold; /* Text font weight */
+}
+
+.tab-bar {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 84px;
+    background-color: #FFFFFF;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    border-top: 1px solid #E0E0E0;
+}
+
+.tab-item {
+    width: 40px;
+    height: 40px;
+    background-color: #CCCCCC;
+    border-radius: 50%;
+}
+.main-box-title {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    color: white;
+    font-size: 28px;
+    font-weight: bold;
+    z-index: 1;
+}
+.location-info {
+    position: absolute;
+    top: 51px; /* 13px below K-Fishery */
+    left: 10px;
+    display: flex;
+    align-items: center;
+    color: white;
+    font-size: 14px; /* Increased font size */
+    z-index: 1;
+}
+.location-icon {
+    width: 20px; /* Increased size */
+    height: 20px; /* Increased size */
+    margin-right: 5px;
+}
+.main-box-description {
+    position: absolute;
+    top: 75px; /* Below location info */
+    left: 10px;
+    color: white;
+    font-size: 12px;
+    z-index: 1;
+}
+.secondary-box-title {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    color: black;
+    font-size: 20px;
+    font-weight: bold;
+}
+.secondary-box-description {
+    position: absolute;
+    top: 48px; /* 8px below title */
+    left: 20px;
+    color: #666; /* Muted color */
+    font-size: 12px;
+    z-index: 1;
+}
+.inner-content-box {
+    position: absolute;
+    top: 80px;
+    left: 16px; /* (358 - 326) / 2 = 16px */
+    width: 326px;
+    height: 70px;
+    background-color: #F1F5F9;
+    border: 1px solid #E2E8F0;
+    border-radius: 5px;
+    z-index: 1;
+    display: flex; /* To center content */
+    align-items: center;
+    justify-content: center;
+}
+.fish-tags-container {
+    position: absolute;
+    top: 165px; /* Below inner-content-box */
+    left: 16px; /* Aligned with inner-content-box */
+    width: 326px; /* Same width as inner-content-box */
+    display: flex;
+    justify-content: space-between;
+    z-index: 1;
+}
+.fish-tag {
+    width: 92px;
+    height: 34px;
+    border-radius: 10px; /* Increased corner radius */
+    border: 1px solid #E2E8F0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 13px;
+    color: black;
+}
+.small-box-title {
+    font-size: 22px;
+    font-weight: bold;
+    color: black;
+    margin-bottom: 5px;
+    display: flex; /* To align icon and text */
+    align-items: center;
+}
+.small-box-description {
+    font-size: 12px;
+    color: #666;
+}
+.warning-icon {
+    width: 20px;
+    height: 20px;
+    margin-right: 5px;
+}
+.small-fish-icon {
+    width: 24px;
+    height: 24px;
+    margin-right: 5px;
+}
+.market-icon {
+    width: 20px;
+    height: 20px;
+    margin-right: 5px;
+}
+.price-check-icon {
+    width: 24px;
+    height: 24px;
+    margin-right: 10px;
+}
+#fish-display-text {
+    font-size: 18px;
+    font-weight: bold;
+    color: black;
+}

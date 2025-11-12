@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title data-i18n-title="market-guide-title">시장 설명서</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .phone-screen {
+            background-color: #0EA5E9; /* Consistent with index.html */
+            padding-bottom: 0; /* Remove padding as tab bar is gone */
+            box-sizing: border-box;
+        }
+        .header-controls {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            width: calc(100% - 40px);
+            display: flex;
+            align-items: center;
+            z-index: 20;
+        }
+        .back-button {
+            color: white;
+            cursor: pointer;
+            z-index: 20;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: rgba(255, 255, 255, 0.2);
+            border-radius: 5px;
+            margin-right: 10px;
+        }
+        .back-arrow-icon {
+            width: 24px;
+            height: 24px;
+        }
+        .header-title {
+            color: white;
+            font-size: 18px;
+            font-weight: bold;
+        }
+        .language-button {
+            margin-left: auto;
+            background-color: rgba(255, 255, 255, 0.2);
+            color: white;
+            padding: 5px 10px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 14px;
+            position: relative;
+        }
+        .language-dropdown {
+            position: absolute;
+            top: 100%;
+            right: 0;
+            margin-top: 5px;
+            background-color: #333;
+            border-radius: 5px;
+            padding: 5px 0;
+            min-width: 100px;
+            display: none;
+            z-index: 9999;
+            text-align: center;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+        }
+        .language-dropdown div {
+            padding: 8px 10px;
+            color: white;
+            cursor: pointer;
+            white-space: nowrap;
+        }
+        .language-dropdown div:hover {
+            background-color: #555;
+        }
+        .content-box {
+            width: 91.8%;
+            max-width: 358px;
+            background-color: white;
+            border-radius: 10px;
+            padding: 20px;
+            /* height: 120px; Removed fixed height */
+            box-sizing: border-box;
+            /* text-align: center; Removed as flex will handle alignment */
+            color: #333;
+            font-size: 16px;
+            line-height: 1.6;
+            display: flex; /* Added flex for internal stacking */
+            flex-direction: column; /* Stack children vertically */
+            align-items: center; /* Center children horizontally */
+        }
+        .small-market-box {
+            width: 326px; /* 91.8% of 358px max-width, or fixed 326px */
+            height: 34px;
+            border-radius: 10px;
+            box-sizing: border-box;
+            display: flex;
+            align-items: center;
+            padding-left: 15px; /* Some padding for content */
+            color: #333;
+            font-size: 14px;
+            border: 2px solid #E2E8F0; /* Increased stroke thickness */
+        }
+        .horizontal-small-box {
+            width: 110px;
+            height: 28px;
+            border-radius: 10px;
+            box-sizing: border-box;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: #333;
+            font-size: 12px;
+            border: 2px solid #E2E8F0; /* Increased stroke thickness */
+        }
+    </style>
+</head>
+<body>
+    <div class="phone-screen">
+        <div class="header-controls">
+            <div class="back-button" onclick="window.location.href='index.html'">
+                <svg class="back-arrow-icon" viewBox="0 0 24 24"><path d="M15 5 L5 12 L15 19 M5 12 H20" stroke="white" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </div>
+            <span class="header-title" data-i18n="market-guide-title">시장 설명서</span>
+            <div class="language-button">
+                <span id="current-language">KO</span>
+                <div class="language-dropdown">
+                    <div data-lang="ko">한국어</div>
+                    <div data-lang="en">English</div>
+                    <div data-lang="zh">中文</div>
+                </div>
+            </div>
+        </div>
+        <div class="content-box" style="margin-top: 80px;">
+            <div style="display: flex; flex-direction: row; justify-content: flex-start; align-items: center; width: 100%;">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style="margin-right: 10px;">
+                    <path d="M3 6L9 4L15 6L21 4V18L15 20L9 18L3 20V6Z" stroke="#0B1020" stroke-width="2"/>
+                    <path d="M15 12C16.1046 12 17 11.1046 17 10C17 8.89543 16.1046 8 15 8C13.8954 8 13 8.89543 13 10C13 11.1046 13.8954 12 15 12Z" fill="#0B1020"/>
+                </svg>
+                <span style="font-size: 18px;" data-i18n="busan-market">부산 · 자갈치시장</span>
+            </div>
+            <div style="display: flex; flex-direction: row; justify-content: flex-start; align-items: center; width: 100%; margin-top: 5px; padding-left: 15px;">
+                <div style="font-size: 12px; margin-right: 10px;"><span data-i18n="structure">구조</span>: <span data-i18n="structure-busan">1층 수산 판매 / 2층 식당</span></div>
+                <div style="font-size: 12px;"><span data-i18n="payment">결제</span>: <span data-i18n="payment-busan">카드/현금</span></div>
+            </div>
+            <div class="small-market-box" style="margin-top: 16px; background-color: #E2E8F0;"></div>
+            <div class="small-market-box" style="margin-top: 10px; background-color: #E2E8F0;"></div>
+            <div class="small-market-box" style="margin-top: 10px; background-color: #C7D2FE;"></div>
+            <div class="small-market-box" style="margin-top: 10px; background-color: #A5F3FC;"></div>
+            <div style="display: flex; flex-direction: row; justify-content: flex-start; width: 100%; margin-top: 16px;">
+                <div class="horizontal-small-box" style="background-color: #E0F2FE; margin-right: 10px;"></div>
+                <div class="horizontal-small-box" style="background-color: #DCFCE7; margin-right: 10px;"></div>
+                <div class="horizontal-small-box" style="background-color: #F5F3FF;"></div>
+            </div>
+        </div>
+
+        <div class="content-box" style="margin-top: 16px;">
+            <div style="display: flex; flex-direction: row; justify-content: flex-start; align-items: center; width: 100%;">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style="margin-right: 10px;">
+                    <path d="M3 6L9 4L15 6L21 4V18L15 20L9 18L3 20V6Z" stroke="#0B1020" stroke-width="2"/>
+                    <path d="M15 12C16.1046 12 17 11.1046 17 10C17 8.89543 16.1046 8 15 8C13.8954 8 13 8.89543 13 10C13 11.1046 13.8954 12 15 12Z" fill="#0B1020"/>
+                </svg>
+                <span style="font-size: 18px;" data-i18n="seoul-market">서울 · 노량진수산시장</span>
+            </div>
+            <div style="display: flex; flex-direction: row; justify-content: flex-start; align-items: center; width: 100%; margin-top: 5px; padding-left: 15px;">
+                <div style="font-size: 12px; margin-right: 10px;"><span data-i18n="structure">구조</span>: <span data-i18n="structure-seoul">판매동/식당동 분리</span></div>
+                <div style="font-size: 12px;"><span data-i18n="payment">결제</span>: <span data-i18n="payment-seoul">카드/현금/간편결제</span></div>
+            </div>
+            <div class="small-market-box" style="margin-top: 16px; background-color: #E2E8F0;"></div>
+            <div class="small-market-box" style="margin-top: 10px; background-color: #E2E8F0;"></div>
+            <div class="small-market-box" style="margin-top: 10px; background-color: #C7D2FE;"></div>
+            <div class="small-market-box" style="margin-top: 10px; background-color: #A5F3FC;"></div>
+            <div style="display: flex; flex-direction: row; justify-content: flex-start; width: 100%; margin-top: 16px;">
+                <div class="horizontal-small-box" style="background-color: #E0F2FE; margin-right: 10px;"></div>
+                <div class="horizontal-small-box" style="background-color: #DCFCE7; margin-right: 10px;"></div>
+                <div class="horizontal-small-box" style="background-color: #F5F3FF;"></div>
+            </div>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>

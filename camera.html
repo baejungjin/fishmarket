@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title data-i18n-title="camera-title">Camera Page</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        /* Override styles for camera page */
+        .phone-screen {
+            background-color: #0B5383;
+            padding-bottom: 0; /* Remove padding as tab bar is gone */
+            box-sizing: border-box;
+        }
+        .camera-view {
+            width: 91.8%; /* 358px / 390px */
+            max-width: 358px;
+            height: 536px;
+            margin-top: 111px;
+            background-color: rgba(0, 0, 0, 0.33); /* Black with 33% opacity */
+            position: relative;
+            border-radius: 10px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden; /* Hide overflowing video parts */
+        }
+        #camera-feed {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover; /* Fill the container */
+            z-index: 1;
+        }
+        .camera-view::before,
+        .camera-view::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            box-sizing: border-box;
+            z-index: 5; /* Ensure grid is above video */
+        }
+        /* Horizontal grid lines */
+        .camera-view::before {
+            top: 33.33%;
+            height: 33.33%;
+            border-top: 1px solid rgba(255, 255, 255, 0.4);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.4);
+        }
+        /* Vertical grid lines */
+        .camera-view::after {
+            left: 33.33%;
+            width: 33.33%;
+            border-left: 1px solid rgba(255, 255, 255, 0.4);
+            border-right: 1px solid rgba(255, 255, 255, 0.4);
+        }
+        .fish-outline {
+            width: 50%;
+            z-index: 10; /* Ensure fish is above grid and video */
+            transform: scaleX(1.3); /* Stretch horizontally */
+        }
+        .fish-outline path {
+            fill: none;
+            stroke: white;
+            stroke-width: 0.5; /* 굵기 대폭 축소 */
+            stroke-dasharray: 2 3; /* 점선 스타일 변경 */
+            stroke-linecap: round;
+        }
+        .fish-eye {
+            fill: white;
+        }
+        .shutter-button-container {
+            margin-top: 24px;
+            position: relative;
+            width: 72px;
+            height: 72px;
+            cursor: pointer;
+        }
+        .shutter-outer-circle {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            background-color: white;
+        }
+        .shutter-inner-circle {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background-color: white;
+            border: 3px solid #0EA5E9;
+            box-sizing: border-box;
+        }
+        .corner-tl, .corner-tr, .corner-bl, .corner-br {
+            position: absolute;
+            width: 30px;
+            height: 30px;
+            border-color: #22D3EE;
+            border-style: solid;
+            border-width: 4px; /* Increased thickness */
+            z-index: 5; /* Above video, below fish */
+            box-sizing: border-box;
+        }
+        .corner-tl {
+            top: 10px;
+            left: 10px;
+            border-right: none;
+            border-bottom: none;
+        }
+        .corner-tr {
+            top: 10px;
+            right: 10px;
+            border-left: none;
+            border-bottom: none;
+        }
+        .corner-bl {
+            bottom: 10px;
+            left: 10px;
+            border-right: none;
+            border-top: none;
+        }
+        .corner-br {
+            bottom: 10px;
+            right: 10px;
+            border-left: none;
+            border-top: none;
+        }
+        .back-button {
+            color: white; /* For text fallback, though SVG stroke is white */
+            cursor: pointer;
+            z-index: 20;
+            width: 40px; /* Fixed width for the button area */
+            height: 40px; /* Fixed height for the button area */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: rgba(255, 255, 255, 0.2);
+            border-radius: 5px;
+            margin-right: 10px; /* Space between button and text */
+        }
+        .header-controls {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            width: calc(100% - 40px); /* 100% minus 20px left and 20px right padding */
+            display: flex;
+            align-items: center;
+            z-index: 20;
+        }
+        .header-title {
+            color: white;
+            font-size: 18px;
+            font-weight: bold;
+        }
+        .language-button {
+            margin-left: auto; /* Pushes it to the right */
+            background-color: rgba(255, 255, 255, 0.2);
+            color: white;
+            padding: 5px 10px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 14px;
+            position: relative; /* For absolute positioning of dropdown */
+        }
+        .language-dropdown {
+            position: absolute;
+            top: 100%;
+            right: 0;
+            margin-top: 5px;
+            background-color: #333; /* Dark background for contrast */
+            border-radius: 5px;
+            padding: 5px 0;
+            min-width: 100px;
+            display: none; /* Hidden by default */
+            z-index: 9999; /* Ensure it's above all other elements */
+            text-align: center;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+        }
+        .language-dropdown div {
+            padding: 8px 10px;
+            color: white;
+            cursor: pointer;
+            white-space: nowrap;
+        }
+        .language-dropdown div:hover {
+            background-color: #555;
+        }
+        .back-arrow-icon {
+            width: 24px; /* Size of the SVG icon */
+            height: 24px; /* Size of the SVG icon */
+        }
+        .popup-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.6);
+            display: none; /* Hidden by default */
+            justify-content: center;
+            align-items: center;
+            z-index: 10000;
+        }
+        .popup-content {
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            width: 80%;
+            max-width: 320px;
+            position: relative;
+            text-align: center;
+        }
+        .close-button {
+            position: absolute;
+            top: 10px;
+            right: 15px;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+            color: #333;
+        }
+    </style>
+</head>
+<body>
+    <div class="phone-screen">
+        <div class="header-controls">
+            <div class="back-button" onclick="window.location.href='index.html'"><svg class="back-arrow-icon" viewBox="0 0 24 24"><path d="M15 5 L5 12 L15 19 M5 12 H20" stroke="white" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+            <span class="header-title" data-i18n="camera-title">어종확인 - 사진촬영</span>
+            <div class="language-button">
+                <span id="current-language">KO</span>
+                <div class="language-dropdown">
+                    <div data-lang="ko">한국어</div>
+                    <div data-lang="en">English</div>
+                    <div data-lang="zh">中文</div>
+                </div>
+            </div>
+        </div>
+        <div class="camera-view">
+            <video id="camera-feed" autoplay playsinline></video>
+            <div class="corner-tl"></div>
+            <div class="corner-tr"></div>
+            <div class="corner-bl"></div>
+            <div class="corner-br"></div>
+            <svg class="fish-outline" viewBox="0 0 100 100">
+                <path d="M 98,50 C 98,65 80,80 50,80 C 20,80 2,65 2,50 C 2,35 20,20 50,20 C 80,20 98,35 98,50 Z"></path>
+                <circle class="fish-eye" cx="75" cy="50" r="3" />
+            </svg>
+        </div>
+
+        <div class="shutter-button-container">
+            <div class="shutter-outer-circle"></div>
+            <div class="shutter-inner-circle"></div>
+        </div>
+    </div>
+    <div id="popup-overlay" class="popup-overlay">
+        <div class="popup-content">
+            <span class="close-button">&times;</span>
+            <h3 data-i18n="fish-info-title">어종 정보</h3>
+            <img id="captured-image" src="" alt="Captured Fish" style="width: 100%; border-radius: 5px; margin-bottom: 15px;">
+            <div id="fish-info-container">
+                <p data-i18n="analyzing">분석 중...</p>
+            </div>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
