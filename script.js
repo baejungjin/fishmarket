@@ -26,14 +26,6 @@ const translations = {
         'market-guide-desc': '구조·상차림비·결제·영업시간 안내',
         'price-check': '오늘의 적정가 빠르게 확인하기',
         'fish-is': '입니다',
-        // warm sea.html
-        'warm-sea-title': '수온바다',
-        'marker-list': '마커 목록',
-        'sort-by-distance': '내 위치 기준 정렬',
-        'name': '이름',
-        'temperature': '수온',
-        'distance': '거리',
-        'my-location': '내 위치',
         'camera-error': '카메라에 접근할 수 없습니다. 권한을 확인해주세요.',
         'camera-not-supported': '현재 브라우저에서는 카메라 기능을 지원하지 않습니다.',
         // warning.html
@@ -85,14 +77,6 @@ const translations = {
         'market-guide-desc': 'Structure · Handling fee · Payment · Business hours',
         'price-check': 'Quickly check today\'s fair price',
         'fish-is': ' is',
-        // warm sea.html
-        'warm-sea-title': 'Warm Sea',
-        'marker-list': 'Marker List',
-        'sort-by-distance': 'Sort by Distance',
-        'name': 'Name',
-        'temperature': 'Temp',
-        'distance': 'Distance',
-        'my-location': 'My Location',
         'camera-error': 'Cannot access camera. Please check permissions.',
         'camera-not-supported': 'Camera feature is not supported in your browser.',
         // warning.html
@@ -144,14 +128,6 @@ const translations = {
         'market-guide-desc': '结构·装卸费·支付·营业时间',
         'price-check': '快速查看今日合理价格',
         'fish-is': '是',
-        // warm sea.html
-        'warm-sea-title': '温暖海域',
-        'marker-list': '标记列表',
-        'sort-by-distance': '按距离排序',
-        'name': '名称',
-        'temperature': '수온',
-        'distance': '距离',
-        'my-location': '我的位置',
         'camera-error': '无法访问相机。请检查权限。',
         'camera-not-supported': '您的浏览器不支持相机功能。',
         // warning.html
@@ -244,16 +220,9 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // --- Navigation Logic ---
-    const fishCheckBox = document.getElementById('fish-check-box');
     const coloredBox = document.querySelector('.colored-box');
     const warningBox = document.getElementById('warning-box');
     const marketGuideBox = document.getElementById('market-guide-box');
-
-    if (fishCheckBox) {
-        fishCheckBox.addEventListener('click', () => {
-            window.location.href = 'warm sea.html';
-        });
-    }
 
     if (coloredBox) {
         coloredBox.addEventListener('click', () => {
@@ -507,13 +476,32 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // --- Fish Tag Click Logic ---
     const fishTags = document.querySelectorAll('.fish-tag');
+    const middleContentBox = document.querySelector('.middle-content-box');
+    
     if (fishTags.length > 0) {
         fishTags.forEach(tag => {
             tag.addEventListener('click', () => {
-                const fishName = tag.textContent.trim();
                 const lang = getCurrentLanguage();
                 const fishIsText = translations[lang]['fish-is'] || translations['ko']['fish-is'];
-                console.log(`${fishName}${fishIsText}`); // Log to console instead of updating fishDisplayText
+                
+                // Get fish name from data-i18n attribute
+                const fishKey = tag.getAttribute('data-i18n');
+                let fishName = '';
+                
+                if (fishKey && translations[lang] && translations[lang][fishKey]) {
+                    fishName = translations[lang][fishKey];
+                } else {
+                    // Fallback to text content
+                    fishName = tag.textContent.trim();
+                }
+                
+                // Display in middle content box
+                if (middleContentBox) {
+                    middleContentBox.textContent = `${fishName}${fishIsText}`;
+                    middleContentBox.style.fontSize = '16px';
+                    middleContentBox.style.color = '#333';
+                    middleContentBox.style.fontWeight = '500';
+                }
             });
         });
     }
