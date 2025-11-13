@@ -1,8 +1,7 @@
-export const config = {
-  api: { bodyParser: false },
-};
+// node-fetch를 CommonJS dynamic import로 사용
+const fetch = (...args) => import('node-fetch').then(({ default: fetch }) => fetch(...args));
 
-export default async function handler(req, res) {
+module.exports = async function handler(req, res) {
   // POST 요청만 허용
   if (req.method !== 'POST') {
     return res.status(405).json({ error: 'Method not allowed' });
@@ -27,10 +26,23 @@ export default async function handler(req, res) {
     const predictionUrl = `${endpoint}/customvision/v3.0/Prediction/${projectId}/classify/iterations/${iterationName}/image`;
 
     // 이미지 바이너리 수신 (스트림 → Buffer)
+    // bodyParser가 비활성화되어 있으므로 req를 스트림으로 직접 읽기
     const chunks = [];
-    for await (const chunk of req) {
-      chunks.push(chunk);
-    }
+    
+    await new Promise((resolve, reject) => {
+      req.on('data', (chunk) => {
+        chunks.push(chunk);
+      });
+      
+      req.on('end', () => {
+        resolve();
+      });
+      
+      req.on('error', (err) => {
+        reject(err);
+      });
+    });
+    
     const imageBuffer = Buffer.concat(chunks);
 
     if (!imageBuffer || imageBuffer.length === 0) {
@@ -67,5 +79,5 @@ export default async function handler(req, res) {
       message: error.message 
     });
   }
-}
+};
 
