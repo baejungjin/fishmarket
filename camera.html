@@ -207,21 +207,24 @@
                     try {
                         const response = await fetch('/api/predict', {
                             method: 'POST',
-                            headers: {
-                                'Content-Type': 'application/octet-stream',
-                            },
                             body: blob
                         });
 
                         if (!response.ok) {
-                            throw new Error(`HTTP error! status: ${response.status}`);
+                            const error = new Error(`HTTP error! status: ${response.status}`);
+                            error.status = response.status;
+                            throw error;
                         }
 
                         const data = await response.json();
                         handlePredictionResult(data);
                     } catch (error) {
                         console.error('예측 요청 오류:', error);
-                        showError('예측 실패 또는 네트워크 오류');
+                        if (error.status === 500) {
+                            showError('예측 실패 (서버 오류) – 잠시 후 다시 시도해주세요');
+                        } else {
+                            showError('예측 실패 또는 네트워크 오류');
+                        }
                     }
                 }, 'image/jpeg', 0.9);
             } catch (error) {

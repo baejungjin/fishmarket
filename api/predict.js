@@ -1,3 +1,7 @@
+export const config = {
+  api: { bodyParser: false },
+};
+
 export default async function handler(req, res) {
   // POST 요청만 허용
   if (req.method !== 'POST') {
@@ -20,10 +24,14 @@ export default async function handler(req, res) {
     }
 
     // Azure Custom Vision Prediction API URL 구성
-    const predictionUrl = `${endpoint}/customvision/v3.1/Prediction/${projectId}/classify/iterations/${iterationName}/image`;
+    const predictionUrl = `${endpoint}/customvision/v3.0/Prediction/${projectId}/classify/iterations/${iterationName}/image`;
 
-    // 이미지 데이터를 그대로 Azure로 전송
-    const imageBuffer = req.body;
+    // 이미지 바이너리 수신 (스트림 → Buffer)
+    const chunks = [];
+    for await (const chunk of req) {
+      chunks.push(chunk);
+    }
+    const imageBuffer = Buffer.concat(chunks);
 
     if (!imageBuffer || imageBuffer.length === 0) {
       return res.status(400).json({ error: 'No image data provided' });
