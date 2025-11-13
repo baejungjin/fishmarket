@@ -10,20 +10,18 @@
     <div class="phone-screen">
         <div class="main-box">
             <span class="main-box-title">K-Fishery</span>
-            <div class="location-info">
-                <svg class="location-icon" viewBox="0 0 24 24">
-                    <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5S10.62 6.5 12 6.5s2.5 1.12 2.5 2.5S13.38 11.5 12 11.5z" fill="black"/>
-                </svg>
-                <span data-i18n="location">부산 · 자갈치시장</span>
+            <div class="language-button">
+                <span id="current-language">KO</span>
+                <div class="language-dropdown">
+                    <div data-lang="ko">한국어</div>
+                    <div data-lang="en">English</div>
+                    <div data-lang="zh">中文</div>
+                </div>
             </div>
             <span class="main-box-description" data-i18n="main-description">AI로 어종·무게 인식 및 오늘의 적정가 확인</span>
         </div>
         <div class="secondary-box">
             <span class="secondary-box-title" data-i18n="seasonal-title">오늘의 제철 추천어종</span>
-            <span class="secondary-box-description" data-i18n="seasonal-description">연안 시계열(K-Means) · SST/어군밀도 기반</span>
-            <div class="inner-content-box" id="fish-display-box">
-                <span id="fish-display-text"></span>
-            </div>
             <div class="fish-tags-container">
                 <div class="fish-tag" style="background-color: #E0F2FE;" data-i18n="flounder">광어</div>
                 <div class="fish-tag" style="background-color: #DCFCE7;" data-i18n="hairtail">전어</div>

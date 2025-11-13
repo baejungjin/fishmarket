@@ -42,39 +42,6 @@
             font-size: 18px;
             font-weight: bold;
         }
-        .language-button {
-            margin-left: auto;
-            background-color: rgba(255, 255, 255, 0.2);
-            color: white;
-            padding: 5px 10px;
-            border-radius: 5px;
-            cursor: pointer;
-            font-size: 14px;
-            position: relative;
-        }
-        .language-dropdown {
-            position: absolute;
-            top: 100%;
-            right: 0;
-            margin-top: 5px;
-            background-color: #333;
-            border-radius: 5px;
-            padding: 5px 0;
-            min-width: 100px;
-            display: none;
-            z-index: 9999;
-            text-align: center;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
-        }
-        .language-dropdown div {
-            padding: 8px 10px;
-            color: white;
-            cursor: pointer;
-            white-space: nowrap;
-        }
-        .language-dropdown div:hover {
-            background-color: #555;
-        }
         .content-box {
             width: 91.8%;
             max-width: 358px;
@@ -87,6 +54,35 @@
             color: #333;
             font-size: 16px;
             line-height: 1.6;
+        }
+        .scale-svg {
+            max-width: 100%; /* Ensure it fits within the content box */
+            height: auto; /* Maintain aspect ratio */
+            margin-bottom: 15px; /* Space below the SVG */
+        }
+        .scale-carousel-container {
+            display: flex;
+            overflow-x: scroll;
+            scroll-snap-type: x mandatory;
+            -webkit-overflow-scrolling: touch; /* For smoother scrolling on iOS */
+            width: 100%; /* Take full width of parent */
+            padding-bottom: 10px; /* Space for scrollbar */
+        }
+        .scale-item {
+            flex: 0 0 100%; /* Each item takes full width of the container */
+            scroll-snap-align: start;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 0 10px; /* Add some padding to the sides of each item */
+            box-sizing: border-box;
+        }
+        .scale-image {
+            max-width: 100%;
+            height: auto;
+            margin-bottom: 15px;
+            border-radius: 10px; /* To match the style of other elements */
         }
     </style>
 </head>
@@ -107,9 +103,452 @@
             </div>
         </div>
         <div class="content-box">
-            <h2 data-i18n="warning-content-title">주의점 내용</h2>
-            <p data-i18n="warning-content">이곳에서는 사기 유형, 숨은 비용 계산 등 시장 이용 시 주의해야 할 사항들을 안내합니다.</p>
-            <p data-i18n="warning-coming-soon">준비 중인 내용입니다. 곧 업데이트될 예정입니다.</p>
+            <div class="scale-carousel-container">
+                <div class="scale-item">
+                    <svg class="scale-svg" xmlns="http://www.w3.org/2000/svg" width="720" height="540" viewBox="0 0 360 270">
+  <defs>
+    <linearGradient id="bodyGrad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#f6f7f9"/>
+      <stop offset="100%" stop-color="#d8dbe1"/>
+    </linearGradient>
+    <linearGradient id="edgeGrad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#cfd3da"/>
+      <stop offset="100%" stop-color="#b4bac4"/>
+    </linearGradient>
+    <linearGradient id="glassGrad" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#74e7c5" stop-opacity="0.25"/>
+      <stop offset="100%" stop-color="#3ab6a3" stop-opacity="0.25"/>
+    </linearGradient>
+    <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="3" stdDeviation="3" flood-color="#000" flood-opacity="0.18"/>
+    </filter>
+    <style>
+      .outline { stroke:#9aa2ad; stroke-width:1; }
+      .tick { stroke:#9aa2ad; stroke-width:1; }
+      .label { fill:#6b7480; font-family:system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif; font-size:7px; }
+      .displayText { fill:#ffffff; font-family:ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace; font-weight:700; }
+    </style>
+  </defs>
+
+  <!-- PLATFORM (glass) -->
+  <g id="platform" filter="url(#shadow)">
+    <rect x="70" y="18" width="220" height="10" rx="3" fill="url(#glassGrad)" stroke="#63c8b0" stroke-opacity="0.6"/>
+  </g>
+
+  <!-- PLATFORM SUPPORTS -->
+  <g id="supports">
+    <rect x="115" y="28" width="16" height="18" rx="2" fill="url(#edgeGrad)" class="outline"/>
+    <rect x="229" y="28" width="16" height="18" rx="2" fill="url(#edgeGrad)" class="outline"/>
+    <rect x="131" y="42" width="98" height="8" rx="2" fill="url(#edgeGrad)" class="outline"/>
+  </g>
+
+  <!-- MID BODY (dial block) -->
+  <g id="dialBlock" filter="url(#shadow)">
+    <rect x="102" y="50" width="156" height="110" rx="6" fill="url(#bodyGrad)" class="outline"/>
+    <!-- DIAL -->
+    <g id="dial" transform="translate(180,105)">
+      <circle r="46" fill="#eef1f5" stroke="#b9c0ca" stroke-width="1.2"/>
+      <circle r="41" fill="#f7f9fb" stroke="#c8ced8" stroke-width="1"/>
+      <!-- ticks -->
+      <g id="ticks">
+        <!-- major ticks (every 30°) -->
+        <g>
+          <line class="tick" x1="0" y1="-41" x2="0" y2="-46"/>
+          <line class="tick" x1="35.5" y1="-20.5" x2="39.5" y2="-22.8"/>
+          <line class="tick" x1="35.5" y1="20.5" x2="39.5" y2="22.8"/>
+          <line x1="0" y1="41" x2="0" y2="46"/>
+          <line x1="-35.5" y1="20.5" x2="-39.5" y1="22.8"/>
+          <line x1="-35.5" y1="-20.5" x2="-39.5" y2="-22.8"/>
+        </g>
+        <!-- minor ticks (every 10°) -->
+        <g stroke="#c2c9d3" stroke-width="0.8">
+          <!-- top quarter -->
+          <line x1="14" y1="-38" x2="16" y2="-42"/>
+          <line x1="27" y1="-30" x2="30" y2="-34"/>
+          <!-- right -->
+          <line x1="41" y1="0" x2="46" y2="0"/>
+          <!-- bottom-right -->
+          <line x1="30" y1="34" x2="27" y1="30"/>
+          <line x1="16" y1="42" x2="14" y1="38"/>
+          <!-- bottom -->
+          <line x1="0" y1="41" x1="0" y1="46"/>
+          <!-- bottom-left -->
+          <line x1="-14" y1="42" x1="-16" y1="38"/>
+          <line x1="-27" y1="34" x1="-30" y1="30"/>
+          <!-- left -->
+          <line x1="-41" y1="0" x1="-46" y1="0"/>
+          <!-- top-left -->
+          <line x1="-30" y1="-34" x1="-27" y1="-30"/>
+          <line x1="-16" y1="-42" x1="-14" y1="-38"/>
+        </g>
+      </g>
+      <!-- dial knob -->
+      <circle r="10" fill="#dfe3ea" stroke="#b9c0ca"/>
+      <!-- pointer -->
+      <g transform="rotate(-12)">
+        <rect x="-1.2" y="-36" width="2.4" height="26" rx="1.2" fill="#8a94a1"/>
+        <circle cy="-12" r="1.8" fill="#8a94a1"/>
+      </g>
+    </g>
+  </g>
+
+  <!-- BASE with digital display -->
+  <g id="base" transform="translate(0,0)" filter="url(#shadow)">
+    <rect x="90" y="162" width="180" height="62" rx="8" fill="url(#bodyGrad)" class="outline"/>
+    <!-- top bevel -->
+    <rect x="98" y="162" width="164" height="7" rx="3" fill="#e4e7ec"/>
+    <!-- display window -->
+    <rect x="130" y="182" width="100" height="28" rx="4" fill="#1b3fae"/>
+    <rect x="132" y="184" width="96" height="24" rx="3" fill="#2860ff"/>
+    <!-- measurement units + text -->
+    <text x="142" y="201" class="displayText" font-size="14">50.0</text>
+    <text x="190" y="201" class="displayText" font-size="10">g</text>
+    <!-- unit labels -->
+    <text x="122" y="200" class="label">T</text>
+    <text x="234" y="200" class="label">UNIT</text>
+    <!-- side buttons -->
+    <g fill="#dfe3ea" stroke="#b9c0ca">
+      <circle cx="114" cy="196" r="6"/>
+      <circle cx="246" cy="196" r="6"/>
+    </g>
+  </g>
+
+  <!-- soft table shadow -->
+  <ellipse cx="180" cy="232" rx="120" ry="10" fill="#000" opacity="0.08"/>
+</svg>
+                    <p data-i18n="scale-zero-check-1">바구니가 올라간 저울이 영점이 맞춰져있는지 확인하세요. (1)</p>
+                </div>
+                <div class="scale-item">
+                    <svg class="scale-svg" xmlns="http://www.w3.org/2000/svg" width="720" height="540" viewBox="0 0 360 270">
+  <defs>
+    <linearGradient id="bodyGrad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#f6f7f9"/>
+      <stop offset="100%" stop-color="#d8dbe1"/>
+    </linearGradient>
+    <linearGradient id="edgeGrad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#cfd3da"/>
+      <stop offset="100%" stop-color="#b4bac4"/>
+    </linearGradient>
+    <linearGradient id="glassGrad" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#74e7c5" stop-opacity="0.25"/>
+      <stop offset="100%" stop-color="#3ab6a3" stop-opacity="0.25"/>
+    </linearGradient>
+    <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="3" stdDeviation="3" flood-color="#000" flood-opacity="0.18"/>
+    </filter>
+    <style>
+      .outline { stroke:#9aa2ad; stroke-width:1; }
+      .tick { stroke:#9aa2ad; stroke-width:1; }
+      .label { fill:#6b7480; font-family:system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif; font-size:7px; }
+      .displayText { fill:#ffffff; font-family:ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace; font-weight:700; }
+    </style>
+  </defs>
+
+  <!-- PLATFORM (glass) -->
+  <g id="platform" filter="url(#shadow)">
+    <rect x="70" y="18" width="220" height="10" rx="3" fill="url(#glassGrad)" stroke="#63c8b0" stroke-opacity="0.6"/>
+  </g>
+
+  <!-- PLATFORM SUPPORTS -->
+  <g id="supports">
+    <rect x="115" y="28" width="16" height="18" rx="2" fill="url(#edgeGrad)" class="outline"/>
+    <rect x="229" y="28" width="16" height="18" rx="2" fill="url(#edgeGrad)" class="outline"/>
+    <rect x="131" y="42" width="98" height="8" rx="2" fill="url(#edgeGrad)" class="outline"/>
+  </g>
+
+  <!-- MID BODY (dial block) -->
+  <g id="dialBlock" filter="url(#shadow)">
+    <rect x="102" y="50" width="156" height="110" rx="6" fill="url(#bodyGrad)" class="outline"/>
+    <!-- DIAL -->
+    <g id="dial" transform="translate(180,105)">
+      <circle r="46" fill="#eef1f5" stroke="#b9c0ca" stroke-width="1.2"/>
+      <circle r="41" fill="#f7f9fb" stroke="#c8ced8" stroke-width="1"/>
+      <!-- ticks -->
+      <g id="ticks">
+        <!-- major ticks (every 30°) -->
+        <g>
+          <line class="tick" x1="0" y1="-41" x2="0" y2="-46"/>
+          <line class="tick" x1="35.5" y1="-20.5" x2="39.5" y2="-22.8"/>
+          <line class="tick" x1="35.5" y1="20.5" x2="39.5" y2="22.8"/>
+          <line x1="0" y1="41" x2="0" y2="46"/>
+          <line x1="-35.5" y1="20.5" x2="-39.5" y1="22.8"/>
+          <line x1="-35.5" y1="-20.5" x2="-39.5" y2="-22.8"/>
+        </g>
+        <!-- minor ticks (every 10°) -->
+        <g stroke="#c2c9d3" stroke-width="0.8">
+          <!-- top quarter -->
+          <line x1="14" y1="-38" x2="16" y2="-42"/>
+          <line x1="27" y1="-30" x2="30" y2="-34"/>
+          <!-- right -->
+          <line x1="41" y1="0" x2="46" y1="0"/>
+          <!-- bottom-right -->
+          <line x1="30" y1="34" x1="27" y1="30"/>
+          <line x1="16" y1="42" x1="14" y1="38"/>
+          <!-- bottom -->
+          <line x1="0" y1="41" x1="0" y1="46"/>
+          <!-- bottom-left -->
+          <line x1="-14" y1="42" x1="-16" y1="38"/>
+          <line x1="-27" y1="34" x1="-30" y1="30"/>
+          <!-- left -->
+          <line x1="-41" y1="0" x1="-46" y1="0"/>
+          <!-- top-left -->
+          <line x1="-30" y1="-34" x1="-27" y1="-30"/>
+          <line x1="-16" y1="-42" x1="-14" y1="-38"/>
+        </g>
+      </g>
+      <!-- dial knob -->
+      <circle r="10" fill="#dfe3ea" stroke="#b9c0ca"/>
+      <!-- pointer -->
+      <g transform="rotate(-12)">
+        <rect x="-1.2" y="-36" width="2.4" height="26" rx="1.2" fill="#8a94a1"/>
+        <circle cy="-12" r="1.8" fill="#8a94a1"/>
+      </g>
+    </g>
+  </g>
+
+  <!-- BASE with digital display -->
+  <g id="base" transform="translate(0,0)" filter="url(#shadow)">
+    <rect x="90" y="162" width="180" height="62" rx="8" fill="url(#bodyGrad)" class="outline"/>
+    <!-- top bevel -->
+    <rect x="98" y="162" width="164" height="7" rx="3" fill="#e4e7ec"/>
+    <!-- display window -->
+    <rect x="130" y="182" width="100" height="28" rx="4" fill="#1b3fae"/>
+    <rect x="132" y="184" width="96" height="24" rx="3" fill="#2860ff"/>
+    <!-- measurement units + text -->
+    <text x="142" y="201" class="displayText" font-size="14">50.0</text>
+    <text x="190" y="201" class="displayText" font-size="10">g</text>
+    <!-- unit labels -->
+    <text x="122" y="200" class="label">T</text>
+    <text x="234" y="200" class="label">UNIT</text>
+    <!-- side buttons -->
+    <g fill="#dfe3ea" stroke="#b9c0ca">
+      <circle cx="114" cy="196" r="6"/>
+      <circle cx="246" cy="196" r="6"/>
+    </g>
+  </g>
+
+  <!-- soft table shadow -->
+  <ellipse cx="180" cy="232" rx="120" ry="10" fill="#000" opacity="0.08"/>
+</svg>
+                    <p data-i18n="scale-zero-check-2">바구니가 올라간 저울이 영점이 맞춰져있는지 확인하세요. (2)</p>
+                </div>
+                <div class="scale-item">
+                    <svg class="scale-svg" xmlns="http://www.w3.org/2000/svg" width="640" height="640" viewBox="0 0 400 400">
+  <defs>
+    <pattern id="mesh" patternUnits="userSpaceOnUse" width="12" height="12" patternTransform="rotate(45)">
+      <rect width="12" height="12" fill="#f8f8f8"/>
+      <path d="M0 6H12 M6 0V12" stroke="#c7c7c7" stroke-width="1"/>
+    </pattern>
+    <linearGradient id="rimGrad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#8a8f93"/>
+      <stop offset="1" stop-color="#61666b"/>
+    </linearGradient>
+    <linearGradient id="waterGrad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#5ac8fa"/>
+      <stop offset="1" stop-color="#0a84ff"/>
+    </linearGradient>
+    <style>
+      .stream {
+        stroke: url(#waterGrad);
+        stroke-width: 3;
+        stroke-linecap: round;
+        stroke-dasharray: 6 10;
+        animation: flow 1.4s linear infinite;
+      }
+      @keyframes flow { to { stroke-dashoffset: -32; } }
+      .drop {
+        fill: url(#waterGrad);
+        opacity: .95;
+        animation: fall 1.8s ease-in infinite;
+      }
+      .drop.del2 { animation-delay: .3s; }
+      .drop.del3 { animation-delay: .6s; }
+      .drop.del4 { animation-delay: .9s; }
+      @keyframes fall {
+        0%   { transform: translateY(0) scale(1); opacity: .0; }
+        10%  { opacity: .95; }
+        70%  { transform: translateY(90px) scale(1.02); }
+        100% { transform: translateY(120px) scale(.98); opacity: 0; }
+      }
+    </style>
+    <filter id="softShadow" x="-50%" y="-50%" width="200%" height="200%">
+      <feDropShadow dx="0" dy="4" stdDeviation="6" flood-color="#000" flood-opacity=".2"/>
+    </filter>
+  </defs>
+
+  <rect x="0" y="0" width="400" height="400" fill="#ffffff"/>
+
+  <g id="basket" transform="translate(40,40)" filter="url(#softShadow)">
+    <ellipse cx="160" cy="30" rx="140" ry="22" fill="#e7eaee" stroke="url(#rimGrad)" stroke-width="4"/>
+    <path id="walls" d="M20,30 L300,30 L260,250 Q160,270 60,250 Z" fill="url(#mesh)" stroke="#a5abb1" stroke-width="3"/>
+    <path d="M30,36 L290,36 L252,245 Q160,262 68,245 Z" fill="rgba(255,255,255,0.65)"/>
+    <path d="M60,250 Q160,270 260,250" fill="none" stroke="url(#rimGrad)" stroke-width="5"/>
+    <g id="holes" fill="#6b7077">
+      <circle cx="95" cy="246" r="3"/>
+      <circle cx="125" cy="252" r="3"/>
+      <circle cx="160" cy="255" r="3"/>
+      <circle cx="195" cy="252" r="3"/>
+      <circle cx="225" cy="246" r="3"/>
+    </g>
+  </g>
+
+  <path d="M70,140 q60,12 120,0 t120,0 v20 q-120,18 -240,0 z" fill="url(#waterGrad)" fill-opacity=".25"/>
+
+  <g transform="translate(40,40)">
+    <path class="stream" d="M95,258 v42"/>
+    <path class="stream" d="M125,262 v34"/>
+    <path class="stream" d="M160,266 v46"/>
+    <path class="stream" d="M195,262 v38"/>
+    <path class="stream" d="M225,258 v44"/>
+  </g>
+
+  <g transform="translate(40,40)">
+    <path class="drop" d="M92 258c0-4 3-7 7-7 4 0 7 3 7 7 0 6-7 10-7 10s-7-4-7-10z"/>
+    <path class="drop del2" d="M157 262c0-4 3-7 7-7 4 0 7 3 7 7 0 6-7 10-7 10s-7-4-7-10z"/>
+    <path class="drop del3" d="M122 260c0-4 3-7 7-7 4 0 7 3 7 7 0 6-7 10-7 10s-7-4-7-10z"/>
+    <path class="drop del4" d="M222 258c0-4 3-7 7-7 4 0 7 3 7 7 0 6-7 10-7 10s-7-4-7-10z"/>
+  </g>
+
+  <ellipse cx="200" cy="330" rx="80" ry="10" fill="#eaf3ff"/>
+  <ellipse cx="200" cy="330" rx="56" ry="7" fill="#d9ebff"/>
+
+  <text x="200" y="380" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="14" fill="#333">
+  </text>
+</svg>
+                    <p data-i18n="basket-drain-check">바구니에 물이 잘 빠지는지 확인하세요.</p>
+                </div>
+                <div class="scale-item">
+                    <img class="scale-image" src="https://imgur.com/UBuwsyd.png" alt="Cable tie on scale">
+                    <p data-i18n="cable-tie-check">저울 기둥에 케이블 타이가 묶여 있는 경우, 무게를 잴 때 바구니가 케이블 타이와 떨어져 있는지 확인하세요.</p>
+                </div>
+                <div class="scale-item">
+                    <svg class="scale-svg" xmlns="http://www.w3.org/2000/svg" width="640" height="640" viewBox="0 0 400 400">
+  <defs>
+    <pattern id="mesh" patternUnits="userSpaceOnUse" width="12" height="12" patternTransform="rotate(45)">
+      <rect width="12" height="12" fill="#f8f8f8"/>
+      <path d="M0 6H12 M6 0V12" stroke="#c7c7c7" stroke-width="1"/>
+    </pattern>
+    <linearGradient id="rimGrad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#8a8f93"/>
+      <stop offset="1" stop-color="#61666b"/>
+    </linearGradient>
+    <linearGradient id="waterGrad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#5ac8fa"/>
+      <stop offset="1" stop-color="#0a84ff"/>
+    </linearGradient>
+    <style>
+      .stream {
+        stroke: url(#waterGrad);
+        stroke-width: 3;
+        stroke-linecap: round;
+        stroke-dasharray: 6 10;
+        animation: flow 1.4s linear infinite;
+      }
+      @keyframes flow { to { stroke-dashoffset: -32; } }
+      .drop {
+        fill: url(#waterGrad);
+        opacity: .95;
+        animation: fall 1.8s ease-in infinite;
+      }
+      .drop.del2 { animation-delay: .3s; }
+      .drop.del3 { animation-delay: .6s; }
+      .drop.del4 { animation-delay: .9s; }
+      @keyframes fall {
+        0%   { transform: translateY(0) scale(1); opacity: .0; }
+        10%  { opacity: .95; }
+        70%  { transform: translateY(90px) scale(1.02); }
+        100% { transform: translateY(120px) scale(.98); opacity: 0; }
+      }
+    </style>
+    <filter id="softShadow" x="-50%" y="-50%" width="200%" height="200%">
+      <feDropShadow dx="0" dy="4" stdDeviation="6" flood-color="#000" flood-opacity=".2"/>
+    </filter>
+  </defs>
+
+  <rect x="0" y="0" width="400" height="400" fill="#ffffff"/>
+
+  <g id="basket" transform="translate(40,40)" filter="url(#softShadow)">
+    <ellipse cx="160" cy="30" rx="140" ry="22" fill="#e7eaee" stroke="url(#rimGrad)" stroke-width="4"/>
+    <path id="walls" d="M20,30 L300,30 L260,250 Q160,270 60,250 Z" fill="url(#mesh)" stroke="#a5abb1" stroke-width="3"/>
+    <path d="M30,36 L290,36 L252,245 Q160,262 68,245 Z" fill="rgba(255,255,255,0.65)"/>
+    <path d="M60,250 Q160,270 260,250" fill="none" stroke="url(#rimGrad)" stroke-width="5"/>
+    <g id="holes" fill="#6b7077">
+      <circle cx="95" cy="246" r="3"/>
+      <circle cx="125" cy="252" r="3"/>
+      <circle cx="160" cy="255" r="3"/>
+      <circle cx="195" cy="252" r="3"/>
+      <circle cx="225" cy="246" r="3"/>
+    </g>
+  </g>
+
+  <path d="M70,140 q60,12 120,0 t120,0 v20 q-120,18 -240,0 z" fill="url(#waterGrad)" fill-opacity=".25"/>
+
+  <g transform="translate(40,40)">
+    <path class="stream" d="M95,258 v42"/>
+    <path class="stream" d="M125,262 v34"/>
+    <path class="stream" d="M160,266 v46"/>
+    <path class="stream" d="M195,262 v38"/>
+    <path class="stream" d="M225,258 v44"/>
+  </g>
+
+  <g transform="translate(40,40)">
+    <path class="drop" d="M92 258c0-4 3-7 7-7 4 0 7 3 7 7 0 6-7 10-7 10s-7-4-7-10z"/>
+    <path class="drop del2" d="M157 262c0-4 3-7 7-7 4 0 7 3 7 7 0 6-7 10-7 10s-7-4-7-10z"/>
+    <path class="drop del3" d="M122 260c0-4 3-7 7-7 4 0 7 3 7 7 0 6-7 10-7 10s-7-4-7-10z"/>
+    <path class="drop del4" d="M222 258c0-4 3-7 7-7 4 0 7 3 7 7 0 6-7 10-7 10s-7-4-7-10z"/>
+  </g>
+
+  <ellipse cx="200" cy="330" rx="80" ry="10" fill="#eaf3ff"/>
+  <ellipse cx="200" cy="330" rx="56" ry="7" fill="#d9ebff"/>
+
+  <text x="200" y="380" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="14" fill="#333">
+  </text>
+</svg>
+                    <p data-i18n="drain-again-check">최종 가격 확정 전에, 물을 한 번 더 빼주세요.</p>
+                </div>
+                <div class="scale-item">
+                    <svg class="scale-svg" xmlns="http://www.w3.org/2000/svg" width="640" height="480" viewBox="0 0 640 480" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M320 448C441.503 448 540 435.464 540 420C540 404.536 441.503 392 320 392C198.497 392 100 404.536 100 420C100 435.464 198.497 448 320 448Z" fill="#E7F8EA"/>
+<path d="M520 128H120C108.954 128 100 136.954 100 148V348C100 359.046 108.954 368 120 368H520C531.046 368 540 359.046 540 348V148C540 136.954 531.046 128 520 128Z" fill="url(#paint0_linear_123_140)" stroke="#0E6E2F" stroke-width="4"/>
+<path opacity="0.65" d="M540 128H100V160H540V128Z" fill="url(#paint1_linear_123_140)"/>
+<path d="M500 108H100C88.9543 108 80 116.954 80 128V328C80 339.046 88.9543 348 100 348H500C511.046 348 520 339.046 520 328V128C520 116.954 511.046 108 500 108Z" fill="url(#paint2_linear_123_140)" stroke="#0E6E2F" stroke-width="4"/>
+<path opacity="0.75" d="M520 108H80V140H520V108Z" fill="url(#paint3_linear_123_140)"/>
+<path d="M480 88H80C68.9543 88 60 96.9543 60 108V308C60 319.046 68.9543 328 80 328H480C491.046 328 500 319.046 500 308V108C500 96.9543 491.046 88 480 88Z" fill="url(#paint4_linear_123_140)" stroke="#0E6E2F" stroke-width="4"/>
+<path d="M352 88H264V328H352V88Z" fill="url(#paint5_linear_123_140)" stroke="#D59B1A" stroke-width="3"/>
+<path opacity="0.75" d="M456 116H104C95.1634 116 88 123.163 88 132V284C88 292.837 95.1634 300 104 300H456C464.837 300 472 292.837 472 284V132C472 123.163 464.837 116 456 116Z" stroke="#0E6E2F" stroke-width="4"/>
+<path opacity="0.75" d="M136 184C147.046 184 156 175.046 156 164C156 152.954 147.046 144 136 144C124.954 144 116 152.954 116 164C116 175.046 124.954 184 136 184Z" stroke="#0E6E2F" stroke-width="4"/>
+<path opacity="0.75" d="M424 248C435.046 248 444 239.046 444 228C444 216.954 435.046 208 424 208C412.954 208 404 216.954 404 228C404 239.046 412.954 248 424 248Z" stroke="#0E6E2F" stroke-width="4"/>
+<path d="M264 192H356M320 172C340 172 356 188 356 208C356 228 340 244 320 244H280V172H320Z" stroke="#0E6E2F" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+<defs>
+<linearGradient id="paint0_linear_123_140" x1="100" y1="128" x2="100" y2="368" gradientUnits="userSpaceOnUse">
+<stop stop-color="#34C759"/>
+<stop offset="1" stop-color="#20A24A"/>
+</linearGradient>
+<linearGradient id="paint1_linear_123_140" x1="100" y1="128" x2="540" y2="128" gradientUnits="userSpaceOnUse">
+<stop stop-color="#1B8F42"/>
+<stop offset="1" stop-color="#167A37"/>
+</linearGradient>
+<linearGradient id="paint2_linear_123_140" x1="80" y1="108" x2="80" y2="348" gradientUnits="userSpaceOnUse">
+<stop stop-color="#34C759"/>
+<stop offset="1" stop-color="#20A24A"/>
+</linearGradient>
+<linearGradient id="paint3_linear_123_140" x1="80" y1="108" x2="520" y2="108" gradientUnits="userSpaceOnUse">
+<stop stop-color="#1B8F42"/>
+<stop offset="1" stop-color="#167A37"/>
+</linearGradient>
+<linearGradient id="paint4_linear_123_140" x1="60" y1="88" x2="60" y2="328" gradientUnits="userSpaceOnUse">
+<stop stop-color="#34C759"/>
+<stop offset="1" stop-color="#20A24A"/>
+</linearGradient>
+<linearGradient id="paint5_linear_123_140" x1="264" y1="88" x2="264" y2="328" gradientUnits="userSpaceOnUse">
+<stop stop-color="#FFE28A"/>
+<stop offset="1" stop-color="#FFC241"/>
+</linearGradient>
+</defs>
+</svg>
+                    <p data-i18n="table-setting-fee-check">인당 상차림비를 확인하세요.</p>
+                </div>
+            </div>
         </div>
     </div>
     <script src="script.js"></script>

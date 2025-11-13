@@ -18,7 +18,6 @@ const translations = {
         'location': '부산 · 자갈치시장',
         'main-description': 'AI로 어종·무게 인식 및 오늘의 적정가 확인',
         'seasonal-title': '오늘의 제철 추천어종',
-        'seasonal-description': '연안 시계열(K-Means) · SST/어군밀도 기반',
         'warm-sea': '수온바다',
         'warm-sea-desc': '수온 데이터로 내일 수영할 바다 찾기',
         'warning': '주의점',
@@ -39,9 +38,12 @@ const translations = {
         'camera-not-supported': '현재 브라우저에서는 카메라 기능을 지원하지 않습니다.',
         // warning.html
         'warning-title': '주의점',
-        'warning-content-title': '주의점 내용',
-        'warning-content': '이곳에서는 사기 유형, 숨은 비용 계산 등 시장 이용 시 주의해야 할 사항들을 안내합니다.',
-        'warning-coming-soon': '준비 중인 내용입니다. 곧 업데이트될 예정입니다.',
+        'scale-zero-check-1': '바구니가 올라간 저울이 영점이 맞춰져있는지 확인하세요. (1)',
+        'scale-zero-check-2': '바구니가 올라간 저울이 영점이 맞춰져있는지 확인하세요. (2)',
+        'basket-drain-check': '바구니에 물이 잘 빠지는지 확인하세요.',
+        'cable-tie-check': '저울 기둥에 케이블 타이가 묶여 있는 경우, 무게를 잴 때 바구니가 케이블 타이와 떨어져 있는지 확인하세요.',
+        'drain-again-check': '최종 가격 확정 전에, 물을 한 번 더 빼주세요.',
+        'table-setting-fee-check': '인당 상차림비를 확인하세요.',
         // market_guide.html
         'market-guide-title': '시장 설명서',
         'busan-market': '부산 · 자갈치시장',
@@ -61,7 +63,7 @@ const translations = {
         // camera.html
         'camera-title': 'Species Identification - Photo',
         'fish-info-title': 'Fish Info',
-        'analyzing': 'Analyzing...',
+        'analyzing': 'Analyzing...', 
         'fish-name': 'Species',
         'fish-weight': 'Weight',
         'fish-price': 'Fair Price',
@@ -75,7 +77,6 @@ const translations = {
         'location': 'Busan · Jagalchi Market',
         'main-description': 'AI-powered species and weight recognition, check today\'s fair price',
         'seasonal-title': 'Today\'s Recommended Seasonal Fish',
-        'seasonal-description': 'Coastal time series (K-Means) · SST/Fish density based',
         'warm-sea': 'Warm Sea',
         'warm-sea-desc': 'Find tomorrow\'s swimming spot with water temperature data',
         'warning': 'Warnings',
@@ -96,9 +97,12 @@ const translations = {
         'camera-not-supported': 'Camera feature is not supported in your browser.',
         // warning.html
         'warning-title': 'Warnings',
-        'warning-content-title': 'Warning Information',
-        'warning-content': 'This section provides information about scam types, hidden cost calculations, and other precautions when using the market.',
-        'warning-coming-soon': 'Content is being prepared. Updates coming soon.',
+        'scale-zero-check-1': 'Check if the scale with the basket on it is zeroed. (1)',
+        'scale-zero-check-2': 'Check if the scale with the basket on it is zeroed. (2)',
+        'basket-drain-check': 'Check if water drains well from the basket.',
+        'cable-tie-check': 'If a cable tie is tied to the scale column, make sure the basket is clear of the cable tie when weighing.',
+        'drain-again-check': 'Please drain the water one more time before final price confirmation.',
+        'table-setting-fee-check': 'Check the table setting fee per person.',
         // market_guide.html
         'market-guide-title': 'Market Guide',
         'busan-market': 'Busan · Jagalchi Market',
@@ -132,7 +136,6 @@ const translations = {
         'location': '釜山 · 札嘎其市场',
         'main-description': 'AI识别鱼种·重量及查看今日合理价格',
         'seasonal-title': '今日推荐时令鱼种',
-        'seasonal-description': '沿海时间序列(K-Means) · 基于SST/鱼群密度',
         'warm-sea': '温暖海域',
         'warm-sea-desc': '用水温数据找到明天可以游泳的海域',
         'warning': '注意事项',
@@ -153,9 +156,13 @@ const translations = {
         'camera-not-supported': '您的浏览器不支持相机功能。',
         // warning.html
         'warning-title': '注意事项',
-        'warning-content-title': '注意事项内容',
-        'warning-content': '这里提供诈骗类型、隐藏费用计算等使用市场时需要注意的事项。',
-        'warning-coming-soon': '内容正在准备中。即将更新。',
+        'scale-zero-check-1': '请检查秤上放有篮子时是否已归零。(1)',
+        'scale-zero-check-2': '请检查秤上放有篮子时是否已归零。(2)',
+        'basket-drain-check': '请检查篮子里的水是否排干。',
+        'cable-tie-check': '如果秤柱上绑有扎带，称重时请确保篮子与扎带分离。',
+        'drain-again-check': '最终价格确定前，请再沥一次水。',
+        'table-setting-fee-check': '请确认每人餐桌费。',
+        'scale-zero-check-6': '请检查秤上放有篮子时是否已归零。(6)',
         // market_guide.html
         'market-guide-title': '市场指南',
         'busan-market': '釜山 · 札嘎其市场',
@@ -229,11 +236,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const cameraFeed = document.getElementById('camera-feed');
     const shutterButton = document.querySelector('.shutter-button-container');
     const canvas = document.createElement('canvas'); // Create a canvas element
-    const languageButton = document.querySelector('.language-button');
     const currentLanguageSpan = document.getElementById('current-language');
-    const languageDropdown = document.querySelector('.language-dropdown');
-    const fishTags = document.querySelectorAll('.fish-tag');
-    const fishDisplayText = document.getElementById('fish-display-text');
     
     // Update language button display
     if (currentLanguageSpan) {
@@ -367,7 +370,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     const currentLangData = fishData[lang] || fishData['ko'];
                     const sizeLabel = translations[lang]['size'] || translations['ko']['size'];
                     const largeLabel = translations[lang]['size-large'] || translations['ko']['size-large'];
-                    const mediumLabel = translations[lang]['size-medium'] || translations['ko']['size-medium'];
+                    const mediumLabel = translations[lang]['size-medium'] || translations[lang]['size-medium'];
                     const smallLabel = translations[lang]['size-small'] || translations['ko']['size-small'];
                     const pricePer100gLabel = translations[lang]['price-per-100g'] || translations['ko']['price-per-100g'];
 
@@ -402,36 +405,115 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // --- Language Selection Logic ---
-    if (languageButton && currentLanguageSpan && languageDropdown) {
-        languageButton.addEventListener('click', (event) => {
-            event.stopPropagation(); // Prevent click from immediately closing dropdown
-            languageDropdown.style.display = languageDropdown.style.display === 'block' ? 'none' : 'block';
-        });
+    // Simple and robust language selector
+    function setupLanguageSelector() {
+        // Find all language buttons on the page
+        const languageButtons = document.querySelectorAll('.language-button');
+        
+        if (languageButtons.length === 0) {
+            return; // No language buttons found
+        }
 
-        languageDropdown.querySelectorAll('div').forEach(option => {
-            option.addEventListener('click', () => {
-                const selectedLang = option.getAttribute('data-lang');
-                changeLanguage(selectedLang);
-                languageDropdown.style.display = 'none';
+        languageButtons.forEach(function(button) {
+            // Find dropdown within this button
+            const dropdown = button.querySelector('.language-dropdown');
+            if (!dropdown) {
+                return; // No dropdown found
+            }
+
+            // Ensure dropdown starts hidden
+            dropdown.style.display = 'none';
+
+            // Toggle function
+            function showDropdown() {
+                // Hide all other dropdowns
+                document.querySelectorAll('.language-dropdown').forEach(function(d) {
+                    d.style.display = 'none';
+                    d.classList.remove('show');
+                });
+                // Show this one
+                dropdown.style.display = 'block';
+                dropdown.classList.add('show');
+            }
+
+            function hideDropdown() {
+                dropdown.style.display = 'none';
+                dropdown.classList.remove('show');
+            }
+
+            // Button click - toggle dropdown
+            button.addEventListener('click', function(e) {
+                e.preventDefault();
+                e.stopPropagation();
+                
+                if (dropdown.style.display === 'block') {
+                    hideDropdown();
+                } else {
+                    showDropdown();
+                }
+            });
+
+            // Language option clicks
+            const options = dropdown.querySelectorAll('[data-lang]');
+            options.forEach(function(option) {
+                option.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    
+                    const lang = this.getAttribute('data-lang');
+                    if (lang === 'ko' || lang === 'en' || lang === 'zh') {
+                        hideDropdown();
+                        changeLanguage(lang);
+                    }
+                });
             });
         });
 
-        // Close dropdown if clicked outside
-        document.addEventListener('click', (event) => {
-            if (!languageButton.contains(event.target)) {
-                languageDropdown.style.display = 'none';
-            }
-        });
+        // Close dropdowns when clicking outside
+        // Use a single handler for all clicks
+        if (!window._languageClickHandler) {
+            window._languageClickHandler = function(e) {
+                const allButtons = document.querySelectorAll('.language-button');
+                let clickedInside = false;
+                
+                allButtons.forEach(function(button) {
+                    if (button.contains(e.target)) {
+                        clickedInside = true;
+                        return;
+                    }
+                    const dropdown = button.querySelector('.language-dropdown');
+                    if (dropdown && dropdown.contains(e.target)) {
+                        clickedInside = true;
+                        return;
+                    }
+                });
+                
+                if (!clickedInside) {
+                    document.querySelectorAll('.language-dropdown').forEach(function(d) {
+                        d.style.display = 'none';
+                        d.classList.remove('show');
+                    });
+                }
+            };
+            
+            // Add event listener with capture phase
+            document.addEventListener('click', window._languageClickHandler, true);
+            document.addEventListener('touchend', window._languageClickHandler, true);
+        }
     }
 
+    // Initialize language selector
+    setupLanguageSelector();
+
     // --- Fish Tag Click Logic ---
-    if (fishTags.length > 0 && fishDisplayText) {
+    const fishTags = document.querySelectorAll('.fish-tag');
+    if (fishTags.length > 0) {
         fishTags.forEach(tag => {
             tag.addEventListener('click', () => {
                 const fishName = tag.textContent.trim();
                 const lang = getCurrentLanguage();
                 const fishIsText = translations[lang]['fish-is'] || translations['ko']['fish-is'];
-                fishDisplayText.textContent = `${fishName}${fishIsText}`;
+                console.log(`${fishName}${fishIsText}`); // Log to console instead of updating fishDisplayText
             });
         });
     }

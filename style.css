@@ -55,6 +55,17 @@ body {
     align-items: flex-start;
     padding: 15px; /* Internal spacing */
     box-sizing: border-box; /* Include padding in width/height */
+    cursor: pointer;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.small-box:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.small-box:active {
+    transform: translateY(0);
 }
 
 .bottom-box {
@@ -69,6 +80,17 @@ body {
     align-items: flex-start;
     padding: 15px; /* Internal spacing */
     box-sizing: border-box; /* Include padding in width/height */
+    cursor: pointer;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.bottom-box:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.bottom-box:active {
+    transform: translateY(0);
 }
 
 .colored-box {
@@ -84,6 +106,19 @@ body {
     color: white; /* Text color */
     font-size: 16px; /* Text font size */
     font-weight: bold; /* Text font weight */
+    cursor: pointer;
+    transition: transform 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease;
+}
+
+.colored-box:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(34, 211, 238, 0.3);
+    background-color: #06b6d4;
+}
+
+.colored-box:active {
+    transform: translateY(0);
+    background-color: #0891b2;
 }
 
 .tab-bar {
@@ -223,4 +258,73 @@ body {
     font-size: 18px;
     font-weight: bold;
     color: black;
+}
+
+/* Language Button Styles */
+.language-button {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    background-color: rgba(255, 255, 255, 0.2);
+    color: white;
+    padding: 5px 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    user-select: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    transition: background-color 0.2s ease;
+}
+
+.language-button:hover {
+    background-color: rgba(255, 255, 255, 0.3);
+}
+
+.language-button:active {
+    background-color: rgba(255, 255, 255, 0.4);
+}
+
+.language-dropdown {
+    position: absolute;
+    top: calc(100% + 5px);
+    right: 0;
+    background-color: #333;
+    border-radius: 5px;
+    padding: 5px 0;
+    min-width: 100px;
+    display: none !important; /* Force hidden by default */
+    z-index: 10000;
+    text-align: center;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+    overflow: hidden;
+}
+
+.language-dropdown.show {
+    display: block !important;
+}
+
+.language-dropdown div {
+    padding: 8px 10px;
+    color: white;
+    cursor: pointer;
+    white-space: nowrap;
+    transition: background-color 0.2s ease;
+    user-select: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+}
+
+.language-dropdown div:hover {
+    background-color: #555;
+}
+
+.language-dropdown div:active {
+    background-color: #666;
 }
